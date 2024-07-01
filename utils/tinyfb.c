@@ -2,7 +2,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <fcntl.h>
-#include <fb.h>
+#include <linux/fb.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <sys/mman.h>
 
 int main(int argc, const char **argv)
 {
