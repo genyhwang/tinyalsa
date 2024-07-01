@@ -17,7 +17,7 @@ LDFLAGS += -pie
 VPATH = ../src:../include/tinyalsa
 
 .PHONY: all
-all: -ltinyalsa tinyplay tinycap tinymix tinypcminfo
+all: -ltinyalsa tinyplay tinycap tinymix tinypcminfo tinyfb
 
 tinyplay tinycap tinypcminfo tinymix: LDLIBS+=-ldl
 
@@ -37,6 +37,10 @@ tinypcminfo: tinypcminfo.o libtinyalsa.a
 
 tinypcminfo.o: tinypcminfo.c pcm.h mixer.h asoundlib.h optparse.h
 
+tinyfb: tinyfb.o
+
+tinyfb.o: tinyfb.c
+
 .PHONY: clean
 clean:
 	$(RM) tinyplay tinyplay.o
@@ -51,6 +55,7 @@ install: tinyplay tinycap tinymix tinypcminfo
 	install tinycap $(DESTDIR)$(BINDIR)/
 	install tinymix $(DESTDIR)$(BINDIR)/
 	install tinypcminfo $(DESTDIR)$(BINDIR)/
+	install tinyfb $(DESTDIR)$(BINDIR)/
 	install -d $(DESTDIR)$(MANDIR)/man1
 	install tinyplay.1 $(DESTDIR)$(MANDIR)/man1/
 	install tinycap.1 $(DESTDIR)$(MANDIR)/man1/
